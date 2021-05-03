@@ -27,7 +27,8 @@ def bootstrap_logger(logfile=None, fmt=None):
 
     """
     if fmt is None:
-        fmt = '%(asctime)s - %(levelname)-5s - [%(filename)s:%(lineno)d] %(message)s'
+        # fmt = '%(asctime)s - %(levelname)-5s - [%(filename)s:%(lineno)d] %(message)s'
+        fmt = '%(message)s'
     logging.basicConfig(level=logging.DEBUG, format=fmt)
 
     #log to file

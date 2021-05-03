@@ -78,7 +78,7 @@ def define_default_arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--yaml", help="load configs from yaml file", default="", type=str)
     parser.add_argument("--workspace", help="Path to save the ckpts and results.", default="", type=str)
-    parser.add_argument("--logfile", help="the filename of log", default=f"tfhammer.log", type=str)
+    parser.add_argument("--logfile", help="the filename of log", default=f"dlhammer.log", type=str)
     parser.add_argument("--ngpu", help="The number of gpu to use.", default=1, type=int)
     return parser
 
