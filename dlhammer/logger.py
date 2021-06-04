@@ -11,7 +11,7 @@ import os
 import sys
 import logging
 
-log = logging.getLogger('DLHammer')
+logger = logging.getLogger('DLHammer')
 
 
 def bootstrap_logger(logfile=None, fmt=None):
@@ -37,10 +37,10 @@ def bootstrap_logger(logfile=None, fmt=None):
         fh = logging.FileHandler(logfile)
         fh.setLevel(logging.DEBUG)
         fh.setFormatter(formatter)
-        log.addHandler(fh)
+        logger.addHandler(fh)
 
-    sys.stdout = LoggerWriter(sys.stdout, log.info)
-    sys.stderr = LoggerWriter(sys.stderr, log.error)
+    sys.stdout = LoggerWriter(sys.stdout, logger.info)
+    sys.stderr = LoggerWriter(sys.stderr, logger.error)
     return
 
 

@@ -14,9 +14,9 @@ CURRENT_FILE_DIRECTORY = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(os.path.join(CURRENT_FILE_DIRECTORY, '../..'))
 sys.path.append(os.path.join(CURRENT_FILE_DIRECTORY, '.'))
 
-from dlhammer import bootstrap, log
+from dlhammer import bootstrap, logger
 bootstrap()
 
-log.info('dummy output')
+logger.info('dummy output')
 
 raise Exception('dummy error')

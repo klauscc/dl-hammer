@@ -10,13 +10,14 @@
 import sys
 import logging
 
-from .logger import bootstrap_logger, log
-from .argparser import bootstrap_args, args
+from .logger import bootstrap_logger, logger
+from .argparser import bootstrap_args, CONFIG
+from .utils.misc import to_string
 
-__all__ = ['bootstrap', 'log', 'args']
+__all__ = ['bootstrap', 'logger', 'CONFIG']
 
 
-def bootstrap(default_args=None):
+def bootstrap(default_cfg=None, print_cfg=True):
     """TODO: Docstring for bootstrap.
 
     Kwargs:
@@ -26,5 +27,7 @@ def bootstrap(default_args=None):
     Returns: TODO
 
     """
-    args = bootstrap_args(default_args)
-    return args, log
+    config = bootstrap_args(default_cfg)
+    if print_cfg:
+        logger.info(to_string(config))
+    return config
