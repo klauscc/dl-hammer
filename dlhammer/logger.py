@@ -39,8 +39,8 @@ def bootstrap_logger(logfile=None, fmt=None):
         fh.setFormatter(formatter)
         logger.addHandler(fh)
 
-    sys.stdout = LoggerWriter(sys.stdout, logger.info)
-    sys.stderr = LoggerWriter(sys.stderr, logger.error)
+    # sys.stdout = LoggerWriter(sys.stdout, logger.info)
+    # sys.stderr = LoggerWriter(sys.stderr, logger.error)
     return
 
 

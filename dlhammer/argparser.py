@@ -47,8 +47,7 @@ def bootstrap_args(default_params=None):
 
 def setup_gpu(ngpu):
     gpuids = get_available_gpuids()
-    os.environ['CUDA_VISIBLE_DEVICES'] = ','.join([str(i) for i in gpuids[:ngpu]])
-    logger.info(f'CUDA_VISIBLE_DEVICES: {os.environ["CUDA_VISIBLE_DEVICES"]}')
+    # os.environ['CUDA_VISIBLE_DEVICES'] = ','.join([str(i) for i in gpuids[:ngpu]])
 
 
 def get_logfile(config):
