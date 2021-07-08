@@ -26,6 +26,7 @@ def bootstrap_logger(logfile=None, fmt=None):
     Returns: TODO
 
     """
+    global logger
     if fmt is None:
         # fmt = '%(asctime)s - %(levelname)-5s - [%(filename)s:%(lineno)d] %(message)s'
         fmt = '%(message)s'
@@ -41,7 +42,7 @@ def bootstrap_logger(logfile=None, fmt=None):
 
     # sys.stdout = LoggerWriter(sys.stdout, logger.info)
     # sys.stderr = LoggerWriter(sys.stderr, logger.error)
-    return
+    return logger
 
 
 class LoggerWriter(object):

@@ -15,11 +15,9 @@ import yaml
 from easydict import EasyDict
 
 # from .utils import get_vacant_gpu
-from .logger import bootstrap_logger, logger
+from .logger import bootstrap_logger
 from .utils.system import get_available_gpuids
 from .utils.misc import merge_dict, merge_opts, to_string, eval_dict_leaf
-
-CONFIG = EasyDict()
 
 BASE_CONFIG = {
     'OUTPUT_DIR': './workspace',
@@ -38,9 +36,8 @@ def bootstrap_args(default_params=None):
     cfg = update_config(parser, default_params)
     create_workspace(cfg)    #create workspace
 
-    CONFIG.update(cfg)
-    bootstrap_logger(get_logfile(CONFIG))    # setup logger
-    setup_gpu(CONFIG.NUM_GPUS)    #setup gpu
+    # bootstrap_logger(get_logfile(cfg))    # setup logger
+    # setup_gpu(CONFIG.NUM_GPUS)    #setup gpu
 
     return cfg
 
@@ -62,7 +59,10 @@ def define_default_arg_parser():
 
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cfg', help='load configs from yaml file', default='', type=str)
+    parser.add_argument('--cfg',
+                        help='load configs from yaml file',
+                        default='',
+                        type=str)
     parser.add_argument('opts',
                         default=None,
                         nargs='*',
