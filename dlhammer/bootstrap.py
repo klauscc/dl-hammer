@@ -10,8 +10,10 @@
 from .logger import bootstrap_logger, logger
 from .argparser import bootstrap_args, get_logfile
 from .utils.misc import to_string
+import torch
 
 LOGGER_SET_FLAG = False
+
 
 def bootstrap(default_cfg=None, print_cfg=True):
     """TODO: Docstring for bootstrap.
@@ -24,10 +26,15 @@ def bootstrap(default_cfg=None, print_cfg=True):
 
     """
     config = bootstrap_args(default_cfg)
+    config.DDP.NUM_GPUS = torch.cuda.device_count()
     logger = setup_logger(config)
     if print_cfg:
-        logger.info(to_string(config))
+        display_config(config)
     return config
+
+
+def display_config(cfg):
+    logger.info(to_string(cfg))
 
 
 def setup_logger(cfg):

@@ -22,7 +22,6 @@ from .utils.misc import merge_dict, merge_opts, to_string, eval_dict_leaf
 BASE_CONFIG = {
     'OUTPUT_DIR': './workspace',
     'SESSION': 'base',
-    'NUM_GPUS': 1,
     'LOG_NAME': 'log.txt'
 }
 
