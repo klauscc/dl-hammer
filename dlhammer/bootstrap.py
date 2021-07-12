@@ -26,7 +26,8 @@ def bootstrap(default_cfg=None, print_cfg=True):
 
     """
     config = bootstrap_args(default_cfg)
-    config.DDP.NUM_GPUS = torch.cuda.device_count()
+    if hasattr(config, 'DDP'):
+        config.DDP.NUM_GPUS = torch.cuda.device_count()
     logger = setup_logger(config)
     if print_cfg:
         display_config(config)
