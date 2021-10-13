@@ -7,6 +7,7 @@
 #
 #================================================================
 
+from numpy.random import random
 from .logger import bootstrap_logger, logger
 from .argparser import bootstrap_args, get_logfile
 from .utils.misc import to_string
@@ -28,6 +29,8 @@ def bootstrap(default_cfg=None, print_cfg=True):
     config = bootstrap_args(default_cfg)
     if hasattr(config, 'DDP'):
         config.DDP.NUM_GPUS = torch.cuda.device_count()
+        if config.DDP.MASTER_PORT == '-1':
+            config.DDP.MASTER_PORT = str(random.randint(10000, 20000))
     logger = setup_logger(config)
     if print_cfg:
         display_config(config)
