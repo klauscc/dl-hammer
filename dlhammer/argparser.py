@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-#================================================================
+# ================================================================
 #   Don't go gently into that good night.
 #
 #   author: klaus
 #   description:
 #
-#================================================================
+# ================================================================
 
 import os
 import argparse
@@ -19,11 +19,7 @@ from .logger import bootstrap_logger
 from .utils.system import get_available_gpuids
 from .utils.misc import merge_dict, merge_opts, to_string, eval_dict_leaf
 
-BASE_CONFIG = {
-    'OUTPUT_DIR': './workspace',
-    'SESSION': 'base',
-    'LOG_NAME': 'log.txt'
-}
+BASE_CONFIG = {"OUTPUT_DIR": "./workspace", "SESSION": "base", "LOG_NAME": "log.txt"}
 
 
 def bootstrap_args(default_params=None):
@@ -33,7 +29,7 @@ def bootstrap_args(default_params=None):
     """
     parser = define_default_arg_parser()
     cfg = update_config(parser, default_params)
-    create_workspace(cfg)    #create workspace
+    create_workspace(cfg)  # create workspace
 
     # bootstrap_logger(get_logfile(cfg))    # setup logger
     # setup_gpu(CONFIG.NUM_GPUS)    #setup gpu
@@ -53,25 +49,26 @@ def get_logfile(config):
 def define_default_arg_parser():
     """Define a default arg_parser.
 
-    Returns: 
+    Returns:
         A argparse.ArgumentParser. More arguments can be added.
 
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cfg',
-                        help='load configs from yaml file',
-                        default='',
-                        type=str)
-    parser.add_argument('opts',
-                        default=None,
-                        nargs='*',
-                        help='modify config options using the command-line')
+    parser.add_argument(
+        "--cfg", help="load configs from yaml file", default="", type=str
+    )
+    parser.add_argument(
+        "opts",
+        default=None,
+        nargs="*",
+        help="modify config options using the command-line",
+    )
 
     return parser
 
 
 def update_config(arg_parser, default_config=None):
-    """ update argparser to args.
+    """update argparser to args.
 
     Args:
         arg_parser: argparse.ArgumentParser.
@@ -82,14 +79,14 @@ def update_config(arg_parser, default_config=None):
         parsed.cfg = default_config["cfg"]
 
     config = EasyDict(BASE_CONFIG.copy())
-    config['cfg'] = parsed.cfg
+    config["cfg"] = parsed.cfg
     # update default config
     if default_config is not None:
         config.update(default_config)
 
     # merge config from yaml
     if os.path.isfile(config.cfg):
-        with open(config.cfg, 'r') as f:
+        with open(config.cfg, "r") as f:
             yml_config = yaml.full_load(f)
         config = merge_dict(config, yml_config)
 
@@ -104,6 +101,7 @@ def update_config(arg_parser, default_config=None):
 
 def create_workspace(cfg):
     cfg_name, ext = os.path.splitext(os.path.basename(cfg.cfg))
-    workspace = os.path.join(cfg.OUTPUT_DIR, cfg_name, cfg.SESSION)
+    # workspace = os.path.join(cfg.OUTPUT_DIR, cfg_name, cfg.SESSION)
+    workspace = os.path.join(cfg.OUTPUT_DIR, cfg.SESSION)
     os.makedirs(workspace, exist_ok=True)
     cfg.WORKSPACE = workspace
